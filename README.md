@@ -1,3 +1,7 @@
+### An noob try to port to 6.72 FW 
+I have some doubts with the gadgets (like what my changes in the SETIDT may cause) so I will wait the theflow talk to know more about the exploit, just saving my progress here until the day.  
+It's hard to contact him directly for mortals like me after all :( 
+
 # PPPwn - PlayStation 4 PPPoE RCE
 PPPwn is a kernel remote code execution exploit for PlayStation 4 upto FW 11.00. This is a proof-of-concept exploit for [CVE-2006-4304](https://hackerone.com/reports/2177925) that was reported responsibly to PlayStation.
 
