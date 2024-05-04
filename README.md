@@ -7,6 +7,10 @@ PPPwn is a kernel remote code execution exploit for PlayStation 4 upto FW 11.00.
 
 Supported versions are:
 - FW 9.00
+- FW 9.03 / 9.04
+- FW 9.50 / 9.60
+- FW 10.00 / 10.01
+- FW 10.50 / 10.70 / 10.71
 - FW 11.00
 - more can be added (PRs are welcome)
 
@@ -56,7 +60,7 @@ On your PS4:
 - Go to `Settings` and then `Network`
 - Select `Set Up Internet connection` and choose `Use a LAN Cable`
 - Choose `Custom` setup and choose `PPPoE` for `IP Address Settings`
-- Enter anything for `PPPoE User ID` and `PPPoE Pasword`
+- Enter anything for `PPPoE User ID` and `PPPoE Password`
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
 - Click `Test Internet Connection` to communicate with your computer
