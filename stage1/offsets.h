@@ -42,12 +42,12 @@
 
 #define kdlsym_addr_pppoe_softc_list 0xffffffff844bccb0
 
-#define kdlsym_addr_cc_cpu 0xffffffff2f88fe30
+#define kdlsym_addr_cc_cpu 0xffffffff8333e3f8
 #define kdlsym_addr_callwheelsize 0xffffffff83db9e30
 
-#define kdlsym_addr_nd6_llinfo_timer 0xffffffff8250D160
+#define kdlsym_addr_nd6_llinfo_timer 0xffffffff8250d160
 
-#define kdlsym_addr_Xill 0xffffffff822d2d20
+#define kdlsym_addr_Xill 0xffffffff822d2cf0
 #define kdlsym_addr_setidt 0xffffffff822a1b90
 
 #define kdlsym_addr_kernel_map 0xffffffff8440dfc0
