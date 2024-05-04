@@ -489,7 +489,7 @@ class OffsetsFirmware_672:
 
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff82368769
     
-    SETIDT_NULL_FUNC = 0xFFFFFFFF822D3670
+    # SETIDT_NULL_FUNC = 0xFFFFFFFF822D3670
     
     # USED WITH XCHG_RDI_8_R8_RET
     ZERO_RW_QWORD_A = 0xFFFFFFFF837400BD
@@ -516,8 +516,8 @@ class OffsetsFirmware_672:
     # -- : add rsp, 0x28 ; pop rbp ; ret
     ADD_RSP_28_POP_RBP_RET = None
     
-    # 0xffffffff82207ce3 : add rsp, 0x20 ; pop rbp ; ret
-    ADD_RSP_20_POP_RBP_RET = 0xffffffff82207ce3 
+    # 0xffffffff824a760b : pop rbx ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; pop rbp ; ret
+    POP_RBP_POP_R12_POP_R13_POP_R14_POP_R15_POP_RBP_RET = 0xffffffff824a760b 
     
     # 0xffffffff8225c464 : add rsp, 8 ; ret
     ADD_RSP_8_RET = 0xffffffff8225c464
@@ -542,6 +542,11 @@ class OffsetsFirmware_672:
 
     # -- : pop r8 ; pop rbp ; ret
     POP_R8_POP_RBP_RET = None
+    
+    
+    # 0xffffffff82973284 : xor r8, r8; xor r9, r9 ; xor r10, r10 ; xor r11, r11 ; lea rax, [rsp+8] ; rep retn
+    XOR_R8_R8_XOR_R9_R9_XOR_R10_R10_XOR_R11_R11_LEA_RAX_RSP_8_RET = 0xffffffff82973284
+    
     
     # 0xffffffff8244ba9a : xchg qword ptr [rdi + 8], r8 ; ret
     XCHG_RDI_8_R8_RET = 0xffffffff8244ba9a
