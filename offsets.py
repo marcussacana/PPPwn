@@ -499,10 +499,10 @@ class OffsetsFirmware_672:
     # with NOPs for insert code
     EMPTY_EXEC_MEM_A = 0xFFFFFFFF82210DF6
 
-    SECOND_GADGET_OFF = 0x41
+    SECOND_GADGET_OFF = 0x3b
 
-    # 0xffffffff82213291 : jmp qword ptr [rsi + 0x41]
-    FIRST_GADGET = 0xffffffff82213291
+    # 0xffffffff82329bad : jmp qword ptr [rsi + 0x3b]
+    FIRST_GADGET = 0xffffffff82329bad
 
     # 0xffffffff82c960f6 : push rbp ; jmp qword ptr [rsi]
     PUSH_RBP_JMP_QWORD_PTR_RSI = 0xffffffff82c960f6
@@ -570,7 +570,10 @@ class OffsetsFirmware_672:
     MOV_RDI_QWORD_PTR_RDI_JMP_RAX = 0xffffffff8249b03c
 
     # 0xffffffff82b92a7a : mov byte ptr [rcx], al ; ret
-    MOV_BYTE_PTR_RCX_AL_RET = 0xffffffff82b92a7a
+    MOV_BYTE_PTR_RCX_AL_RET = 0xffffffff82b92a7a    
+    
+    # 0xffffffff82473B01 : mov dword ptr [rcx], eax ; ret
+    MOV_DWORD_PTR_RCX_EAX_RET = 0xffffffff82473B01
 
     # 0xffffffff824c9359 : mov rdi, rbx ; call r12
     MOV_RDI_RBX_CALL_R12 = 0xffffffff824c9359
