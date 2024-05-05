@@ -8,7 +8,56 @@
 #ifndef __OFFSETS_H__
 #define __OFFSETS_H__
 
-#if FIRMWARE == 900 // FW 9.00
+
+#if (FIRMWARE == 800 || FIRMWARE == 801 || FIRMWARE == 803) // FW 8.00 / 8.01 / 8.03
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_printf 0xffffffff82630ae0
+
+#define kdlsym_addr_sysent 0xffffffff832fc4d0
+
+#define kdlsym_addr_amd_syscall_patch1 0xffffffff82200490
+#define kdlsym_addr_amd_syscall_patch2 0xffffffff822004b5
+#define kdlsym_addr_amd_syscall_patch3 0xffffffff822004b9
+#define kdlsym_addr_amd_syscall_patch4 0xffffffff822004c2
+
+#define kdlsym_addr_copyin_patch1 0xffffffff8245e407
+#define kdlsym_addr_copyin_patch2 0xffffffff8245e413
+
+#define kdlsym_addr_copyout_patch1 0xffffffff8245e312
+#define kdlsym_addr_copyout_patch2 0xffffffff8245e31e
+
+#define kdlsym_addr_copyinstr_patch1 0xffffffff8245e8b3
+#define kdlsym_addr_copyinstr_patch2 0xffffffff8245e8bf
+#define kdlsym_addr_copyinstr_patch3 0xffffffff8245e8f0
+
+
+#elif (FIRMWARE == 850 || FIRMWARE == 852) // FW 8.50 / 8.52
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_printf 0xffffffff8235d570
+
+#define kdlsym_addr_sysent 0xffffffff832fc5c0
+
+#define kdlsym_addr_amd_syscall_patch1 0xffffffff82200490 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch2 0xffffffff822004b5 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch3 0xffffffff822004b9 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch4 0xffffffff822004c2 // Identical to 9.00
+
+#define kdlsym_addr_copyin_patch1 0xffffffff825a4337
+#define kdlsym_addr_copyin_patch2 0xffffffff825a4343
+
+#define kdlsym_addr_copyout_patch1 0xffffffff825a4242
+#define kdlsym_addr_copyout_patch2 0xffffffff825a424e
+
+#define kdlsym_addr_copyinstr_patch1 0xffffffff825a47e3
+#define kdlsym_addr_copyinstr_patch2 0xffffffff825a47ef
+#define kdlsym_addr_copyinstr_patch3 0xffffffff825a4820
+
+
+#elif FIRMWARE == 900 // FW 9.00
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
@@ -54,7 +103,7 @@
 #define kdlsym_addr_copyinstr_patch2 0xffffffff825c1caf
 #define kdlsym_addr_copyinstr_patch3 0xffffffff825c1ce0
 
-#elif (FIRMWARE == 903 || FIRMWARE == 904) // FW 9.03/9.04
+#elif (FIRMWARE == 903 || FIRMWARE == 904) // FW 9.03 / 9.04
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0 // Identical to 9.00
 
@@ -78,7 +127,7 @@
 #define kdlsym_addr_copyinstr_patch3 0xffffffff82471860
 
 
-#elif (FIRMWARE == 950 || FIRMWARE == 960) // FW 9.50 / 9.60
+#elif (FIRMWARE == 950 || FIRMWARE == 951 || FIRMWARE == 960) // FW 9.50 / 9.51 / 9.60
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 #define kdlsym_addr_printf 0xffffffff82405470
@@ -101,7 +150,7 @@
 #define kdlsym_addr_copyinstr_patch3 0xffffffff824023f0
 
 
-#elif (FIRMWARE == 1000 || FIRMWARE == 1001) // FW 10.00/10.01
+#elif (FIRMWARE == 1000 || FIRMWARE == 1001) // FW 10.00 / 10.01
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 #define kdlsym_addr_printf 0xffffffff822c50f0
